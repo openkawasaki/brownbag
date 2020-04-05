@@ -32,7 +32,6 @@ function readShopList() {
     });
 }
 
-
 //--------------------------
 // for sidemenu & pushpage
 //--------------------------

@@ -1,5 +1,35 @@
 <ons-page id="map-page">
     <div id="map">
-        map
     </div>
+
+    <script>
+        var map = L.map('map').setView([35.856306, 139.902861], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var items = getShopItems();
+        for (var ii=0; ii<items.length; ii++) {
+            var lon =　items[ii]["fX"];
+            var lat =　items[ii]["fY"];
+            var name = items[ii]["Name"];
+            var addr = items[ii]["Address1"];
+            var tel  = items[ii]["Phone"];
+            var category = items[ii]["category"];
+
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup('名称：' + name +　"<br>" + 'カテゴリ：' + category +　"<br>"  + '電話：' + tel +　"<br>" + '住所：' + addr)
+                .openPopup();
+        }
+
+    </script>
+
+    <style>
+        #map {
+            z-index: 0;
+            /*width: 100%;*/
+            height: 100%;
+            text-align: left;
+        }
+    </style>
 </ons-page>

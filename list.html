@@ -86,15 +86,6 @@
                 countItems: function() {
                     return getShopItemCount();
                 },
-                getRandomName:function () {
-                    const names = ['Oscar', 'Max', 'Tiger', 'Sam', 'Misty', 'Simba', 'Coco', 'Chloe', 'Lucy', 'Missy'];
-                    return names[Math.floor(Math.random() * names.length)];
-                },
-                getRandomUrl:function () {
-                    const width = 40 + Math.floor(20 * Math.random());
-                    const height = 40 + Math.floor(20 * Math.random());
-                    return `https://placekitten.com/g/${width}/${height}`;
-                },
                 getItem: function (index) {
                     var item = getShopItem(index);
                     if (!item) {
