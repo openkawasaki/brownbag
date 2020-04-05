@@ -1,21 +1,29 @@
 <ons-page id="info-page">
         <ons-toolbar>
             <div class="left">
-                <ons-back-button>Home</ons-back-button>
+                <ons-back-button>お店を探す</ons-back-button>
             </div>
             <div class="center"></div>
         </ons-toolbar>
 
         <ons-card>
-            <div id="title">ページ遷移</div>
-            <div id="content">押してみよう</div>
+            <div id="title">タイトル</div>
+            <div id="index">index</div>
+            <div id="content">コンテンツ</div>
         </ons-card>
 
     <script>
         ons.getScriptPage().onInit = function () {
-            console.log("info-page:onInit: " + this.data.title);
-
+            //console.log("info-page:onInit: " + this.data.title);
             this.querySelector('#title').textContent = this.data.title;
+            this.querySelector('#index').textContent = this.data.index;
+
+            var index = parseInt(this.data.index);
+            var item = getShopItem(index);
+            if (item) {
+                var text = JSON.stringify(item);
+                this.querySelector('#content').textContent = text;
+            }
         }
     </script>
 

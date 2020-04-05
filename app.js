@@ -3,7 +3,35 @@
 // CordovaのAPIを呼び出す準備が整った
 ons.ready(function() {
     console.log("ons.ready");
+
+    readShopList();
 });
+
+var g_shop_list = null;
+function getShopItem(index) {
+    if (g_shop_list == null) {
+        return null;
+    } else if (index　<　0 ||　g_shop_list.length <= index) {
+        return null;
+    }
+    return g_shop_list[index];
+}
+function getShopItems() {
+    return g_shop_list;
+}
+function getShopItemCount() {
+    if (g_shop_list == null) {
+        return 0;
+    }
+    return g_shop_list.length;
+}
+function readShopList() {
+    $.getJSON("data.json" , function(data) {
+        g_shop_list = data;
+        console.log("readShopList(): length=" +　getShopItemCount());
+    });
+}
+
 
 //--------------------------
 // for sidemenu & pushpage
@@ -25,9 +53,9 @@ window.fn.loadLink = function (url) {
 
 window.fn.pushPage = function (page, anim) {
     if (anim) {
-        document.getElementById('appNavigator').pushPage(page.id, { data: { title: page.title }, animation: anim });
+        document.getElementById('appNavigator').pushPage(page.id, { data: { title: page.title, index: page.index }, animation: anim });
     } else {
-        document.getElementById('appNavigator').pushPage(page.id, { data: { title: page.title } });
+        document.getElementById('appNavigator').pushPage(page.id, { data: { title: page.title, index: page.index } });
     }
 };
 
@@ -57,4 +85,3 @@ document.addEventListener("init", function(event) {
         console.log("setting-page");
     }
 });
-

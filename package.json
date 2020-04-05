@@ -17,6 +17,7 @@
     "onsenui": "^2.10.10"
   },
   "devDependencies": {
+    "csv2json": "^2.0.2",
     "gh-pages": "^2.2.0"
   }
 }

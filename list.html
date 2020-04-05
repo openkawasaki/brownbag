@@ -57,11 +57,11 @@
             var infiniteList = document.getElementById('infinite-list');
 
             infiniteList.delegate = {
-                createItemContent: function(i) {
-                    return this.createItem(i);
+                createItemContent: function(index) {
+                    return this.createItem(index);
                 },
                 countItems: function() {
-                    return 10;
+                    return getShopItemCount();
                 },
                 getRandomName:function () {
                     const names = ['Oscar', 'Max', 'Tiger', 'Sam', 'Misty', 'Simba', 'Coco', 'Chloe', 'Lucy', 'Missy'];
@@ -72,20 +72,36 @@
                     const height = 40 + Math.floor(20 * Math.random());
                     return `https://placekitten.com/g/${width}/${height}`;
                 },
-                getData: function () {
+                getItem: function (index) {
+                    var item = getShopItem(index);
+                    if (!item) {
+                        return null;
+                    }
+                    //var imageurl = "shop.png";
+                    //var imageurl = "/image/IMG_4423.jpg";
+                    var imageurl = "/image/shop.png";
+                    /*
+                    if (item["Icon"] !==　null && item["Icon"].length > 0) {
+                        imageurl = item["Icon"];
+                    }
+                    */
                     return {
-                        name: this.getRandomName(),
-                        url: this.getRandomUrl()
+                        name: item["Name"],
+                        url: imageurl
                     };
                 },
                 createItem: function (index) {
-                    var data = this.getData();
+                    var item = this.getItem(index);
+                    if (!item) {
+                        return null;
+                    }
+
                     return ons.createElement(`
-                        <ons-list-item onclick="fn.pushPage({'id': 'info.html', 'title': '丁字屋'})" modifier="chevron">
+                        <ons-list-item onclick="fn.pushPage({'id':'info.html', 'title':'${item.name}', 'index':'${index}'})" modifier="chevron">
                             <div class="left">
-                                <img class="list-item__thumbnail" src="${data.url}">
+                                <img class="list-item__thumbnail" src="${item.url}">
                             </div>
-                        <div class="center">${data.name}</div>
+                        <div class="center">${item.name}</div>
                         </ons-list-item>
                     `);
                 },
