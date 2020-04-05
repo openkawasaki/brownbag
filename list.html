@@ -1,5 +1,98 @@
 <ons-page id="list-page">
-    <div id="list">
-        list
-    </div>
+    <p style="text-align: center; margin-top: 10px;">
+        <ons-search-input
+                placeholder="検索"
+                onchange="search(this.value)"
+        ></ons-search-input>
+    </p>
+
+    <ons-list>
+        <ons-list-header>カテゴリー</ons-list-header>
+        <ons-list-item>
+            <div class="center">
+                <ons-select id="type-input" style="width:100%">
+                    <option value="both">
+                        出前＆テイクアウト
+                    </option>
+                    <option value="catering">
+                        出前
+                    </option>
+                    <option value="lunchbox">
+                        テイクアウト
+                    </option>
+                </ons-select>
+
+            </div>
+        </ons-list-item>
+        <ons-list-header>メニュー</ons-list-header>
+        <ons-list-item>
+            <div class="center">
+                <ons-select id="menu-input" style="width:100%">
+                    <option value="restaurant">
+                        洋食
+                    </option>
+                    <option value="chinese">
+                        中華
+                    </option>
+                    <option value="lunchbox">
+                        お弁当
+                    </option>
+                </ons-select>
+
+            </div>
+        </ons-list-item>
+
+        <ons-list-header>店舗</ons-list-header>
+        <ons-lazy-repeat id="infinite-list"></ons-lazy-repeat>
+    </ons-list>
+
+    <script>
+        function search(value) {
+            var text = 'Searched for: ' + value;
+            ons.notification.alert(text);
+        }
+
+        // アクティブなタブが変わる前に発火します。
+        document.addEventListener('prechange', function(event) {
+            var infiniteList = document.getElementById('infinite-list');
+
+            infiniteList.delegate = {
+                createItemContent: function(i) {
+                    return this.createItem(i);
+                },
+                countItems: function() {
+                    return 10;
+                },
+                getRandomName:function () {
+                    const names = ['Oscar', 'Max', 'Tiger', 'Sam', 'Misty', 'Simba', 'Coco', 'Chloe', 'Lucy', 'Missy'];
+                    return names[Math.floor(Math.random() * names.length)];
+                },
+                getRandomUrl:function () {
+                    const width = 40 + Math.floor(20 * Math.random());
+                    const height = 40 + Math.floor(20 * Math.random());
+                    return `https://placekitten.com/g/${width}/${height}`;
+                },
+                getData: function () {
+                    return {
+                        name: this.getRandomName(),
+                        url: this.getRandomUrl()
+                    };
+                },
+                createItem: function (index) {
+                    var data = this.getData();
+                    return ons.createElement(`
+                        <ons-list-item onclick="fn.pushPage({'id': 'info.html', 'title': '丁字屋'})" modifier="chevron">
+                            <div class="left">
+                                <img class="list-item__thumbnail" src="${data.url}">
+                            </div>
+                        <div class="center">${data.name}</div>
+                        </ons-list-item>
+                    `);
+                },
+            };
+
+            infiniteList.refresh();
+        });
+    </script>
+
 </ons-page>

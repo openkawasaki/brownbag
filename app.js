@@ -1,5 +1,13 @@
 //ons.bootstrap();
 
+// CordovaのAPIを呼び出す準備が整った
+ons.ready(function() {
+    console.log("ons.ready");
+});
+
+//--------------------------
+// for sidemenu & pushpage
+//--------------------------
 window.fn = {};
 
 window.fn.toggleMenu = function () {
@@ -23,14 +31,18 @@ window.fn.pushPage = function (page, anim) {
     }
 };
 
+//--------------------------
 // アクティブなタブが変わる前に発火します。
+//--------------------------
 document.addEventListener('prechange', function(event) {
     // ラベル設定
     document.querySelector('ons-toolbar .center')
         .innerHTML = event.tabItem.getAttribute('label');
 });
 
+//--------------------------
 // initイベント
+//--------------------------
 document.addEventListener("init", function(event) {
     var page = event.target;
     if (page.id === "home-page") {
@@ -40,8 +52,9 @@ document.addEventListener("init", function(event) {
     } else if (page.id === "map-page") {
         console.log("map-page");
     } else if (page.id === "info-page") {
-        console.log("inso-page");
+        console.log("info-page");
     } else if (page.id === "setting-page") {
         console.log("setting-page");
     }
 });
+
