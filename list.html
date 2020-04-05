@@ -10,24 +10,23 @@
         <ons-list-header>カテゴリー</ons-list-header>
         <ons-list-item>
             <div class="center">
-                <ons-select id="type-input" style="width:100%">
+                <ons-select id="type-input" style="width:100%" onchange="selectType(event)">
                     <option value="both">
                         出前＆テイクアウト
                     </option>
                     <option value="catering">
                         出前
                     </option>
-                    <option value="lunchbox">
+                    <option value="takeout">
                         テイクアウト
                     </option>
                 </ons-select>
-
             </div>
         </ons-list-item>
         <ons-list-header>メニュー</ons-list-header>
         <ons-list-item>
             <div class="center">
-                <ons-select id="menu-input" style="width:100%">
+                <ons-select id="menu-input" style="width:100%" onchange="selectMenu(event)" >
                     <option value="restaurant">
                         洋食
                     </option>
@@ -38,7 +37,6 @@
                         お弁当
                     </option>
                 </ons-select>
-
             </div>
         </ons-list-item>
 
@@ -48,8 +46,33 @@
 
     <script>
         function search(value) {
-            var text = 'Searched for: ' + value;
-            ons.notification.alert(text);
+            var text = '検索文字: ' + value;
+            //ons.notification.alert(text);
+            ons.notification.toast(text, { timeout: 1000, animation: 'fall' });
+        }
+        function selectType(event) {
+            var value = event.target.value;
+            var message = "";
+            if (value == "both") {
+                message = "出前＆テイクアウト";
+            } else if (value == "catering") {
+                message = "出前";
+            } else if (value == "takeout") {
+                message = "テイクアウト";
+            }
+            ons.notification.toast(message, { timeout: 1000, animation: 'fall' });
+        }
+        function selectMenu(event) {
+            var value = event.target.value;
+            var message = "";
+            if (value == "restaurant") {
+                message = "洋食";
+            } else if (value == "chinese") {
+                message = "中華";
+            } else if (value == "lunchbox") {
+                message = "お弁当";
+            }
+            ons.notification.toast(message, { timeout: 1000, animation: 'fall' });
         }
 
         // アクティブなタブが変わる前に発火します。
@@ -85,23 +108,41 @@
                         imageurl = item["Icon"];
                     }
                     */
-                    return {
+                    var tel = item["Phone"];
+                    if (tel ===　null) {
+                        tel =　"";
+                    }
+                    //console.log("getItem0: " + tel);
+                    var category = item["category"];
+                    if (category ===　null) {
+                        category =　"";
+                    }
+
+                    //console.log("getItem0: " + JSON.stringify(item));
+                    var data = {
                         name: item["Name"],
-                        url: imageurl
+                        url: imageurl,
+                        tel: tel,
+                        category: category
                     };
+                    //console.log("getItem1: " + JSON.stringify(data));
+                    return data;
                 },
                 createItem: function (index) {
                     var item = this.getItem(index);
                     if (!item) {
                         return null;
                     }
+                    //console.log("createItem: " + JSON.stringify(item));
 
                     return ons.createElement(`
                         <ons-list-item onclick="fn.pushPage({'id':'info.html', 'title':'${item.name}', 'index':'${index}'})" modifier="chevron">
                             <div class="left">
                                 <img class="list-item__thumbnail" src="${item.url}">
                             </div>
-                        <div class="center">${item.name}</div>
+                            <div class="center">
+                                <span class="list-item__title">${item.name}</span><span class="list-item__subtitle">カテゴリ：${item.category} TEL:${item.tel}</span>
+                            </div>
                         </ons-list-item>
                     `);
                 },
