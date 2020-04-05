@@ -2,8 +2,8 @@
   "name": "brownbag",
   "version": "0.0.1",
   "scripts": {
-    "serven": "http-server",
-    "serve": "python -m http.server",
+    "serve-node": "http-server",
+    "serve": "python -m http.server 9000 --bind 127.0.0.1",
     "deploy": "npm run build && gh-pages -d build/public"
   },
   "repository": {

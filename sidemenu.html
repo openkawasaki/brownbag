@@ -1,0 +1,79 @@
+<ons-page>
+  <div class="profile-pic">
+    <img src="brownbag.jpg">
+  </div>
+
+  <!------------>
+  <ons-list-title>アクセス</ons-list-title>
+  <ons-list>
+      <ons-list-item onclick="fn.loadView(0)">
+          <div class="left">
+              <ons-icon fixed-width class="list-item__icon" icon="ion-home, material:md-home"></ons-icon>
+          </div>
+          <div class="center">
+            ホーム
+          </div>
+          <div class="right">
+            <ons-icon icon="fa-link"></ons-icon>
+          </div>
+      </ons-list-item>
+  </ons-list>
+  <!------------>
+
+  <!------------>
+  <ons-list-title style="margin-top: 10px">リンク</ons-list-title>
+  <ons-list>
+      <ons-list-item onclick="fn.loadLink('https://onsen.io/v2/docs/guide/js/')">
+          <div class="left">
+              <ons-icon fixed-width class="list-item__icon" icon="ion-document-text"></ons-icon>
+          </div>
+          <div class="center">
+              ドキュメント
+          </div>
+          <div class="right">
+              <ons-icon icon="fa-external-link"></ons-icon>
+          </div>
+      </ons-list-item>
+    </ons-list>
+  <!------------>
+
+<script>
+  ons.getScriptPage().onInit = function() {
+    // Set ons-splitter-side animation
+    this.parentElement.setAttribute('animation', ons.platform.isAndroid() ? 'overlay' : 'reveal');
+  };
+</script>
+
+<style>
+  .profile-pic {
+      width: 200px;
+      background-color: #fff;
+      margin: 20px auto 10px;
+      border: 1px solid #999;
+      border-radius: 4px;
+  }
+
+  .profile-pic > img {
+      display: block;
+      max-width: 100%;
+  }
+
+  ons-list-item {
+    color: #444;
+  }
+</style>
+</ons-page>
+
+<!--
+<ons-template id="sidemenu.html">
+    <ons-list>
+        <ons-list-item modifier="chevron" onclick="menu.setMainPage('page1.html', {closeMenu: true})">
+            page1.html
+        </ons-list-item>
+        <ons-list-item modifier="chevron" onclick="menu.setMainPage('page2.html', {closeMenu: true})">
+            page2.html
+        </ons-list-item>
+    </ons-list>
+</ons-template>
+-->
+

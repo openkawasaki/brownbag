@@ -1,43 +1,53 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
-  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
 </head>
+
 <body>
- <ons-page>
+<ons-navigator id="appNavigator" swipeable swipe-target-width="80px">
+    <ons-page>
+        <ons-splitter id="appSplitter">
+            <ons-splitter-side id="sidemenu" page="sidemenu.html" swipeable side="right" collapse="" width="260px"></ons-splitter-side>
+            <ons-splitter-content page="tabbar.html"></ons-splitter-content>
+        </ons-splitter>
+    </ons-page>
+</ons-navigator>
+
+<ons-template id="tabbar.html">
+<ons-page>
     <ons-toolbar>
-      <div class="center" id="toolbar-title"></div>
+        <div class="center" id="toolbar-title">brown bag</div>
+        <div class="right">
+            <ons-toolbar-button onclick="fn.toggleMenu()">
+                <ons-icon icon="fa-bars"></ons-icon>
+            </ons-toolbar-button>
+        </div>
     </ons-toolbar>
     <ons-tabbar position="auto">
-      <ons-tab label="ホーム" icon="md-home" page="tab1.html" active>
-      </ons-tab>
-      <ons-tab label="設定" icon="fa-cog" active-icon="fa-cogs" page="tab2.html">
-      </ons-tab>
+        <ons-tab label="ホーム" icon="fa-home" page="home.html" active>
+        </ons-tab>
+        <ons-tab label="リスト" icon="fa-list" page="list.html">
+        </ons-tab>
+        <ons-tab label="マップ" icon="fa-map" active-icon="fa-map-o" page="map.html">
+        </ons-tab>
+        <ons-tab label="情報" icon="fa-info" page="info.html">
+        </ons-tab>
+        <ons-tab label="設定" icon="fa-cog" active-icon="fa-cogs" page="setting.html">
+        </ons-tab>
     </ons-tabbar>
-  </ons-page>
+</ons-page>
+</ons-template>
 
-<script>
+<script src="app.js"></script>
 
-  document.addEventListener('prechange', function(event) {
-  document.querySelector('ons-toolbar .center')
-    .innerHTML = event.tabItem.getAttribute('label');
-  });
-
-  document.addEventListener("init", function(event) {
-      var page = event.target;  // initイベントが発生したページ
-      if (page.id === "second-page") {
-            // tab2.htmlに対するDOM操作
-          document.getElementById("message").textContent = "Tab2が開きました";
-      }
-  });
-</script>
 </body>
 </html>
