@@ -14,7 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "http-server": "^0.12.1",
-    "onsenui": "^2.10.10"
+    "onsenui": "^2.10.10",
+    "kind-of": ">=6.0.3"
   },
   "devDependencies": {
     "csv2json": "^2.0.2",
