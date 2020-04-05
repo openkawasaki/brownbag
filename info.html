@@ -1,29 +1,146 @@
 <ons-page id="info-page">
-        <ons-toolbar>
-            <div class="left">
-                <ons-back-button>お店を探す</ons-back-button>
-            </div>
-            <div class="center"></div>
-        </ons-toolbar>
+    <ons-toolbar>
+        <div class="left">
+            <ons-back-button>お店を探す</ons-back-button>
+        </div>
+        <div class="center"></div>
+    </ons-toolbar>
 
-        <ons-card>
-            <div id="title">タイトル</div>
-            <div id="index">index</div>
-            <div id="content">コンテンツ</div>
-        </ons-card>
+    <ons-card>
+        <div id="shop_image" class="image_center">
+        </div>
+    </ons-card>
+
+    <ons-list-title id="shop_name"></ons-list-title>
+    <ons-list>
+        <ons-list-header>お店紹介</ons-list-header>
+        <ons-list-item id="shop_summary"></ons-list-item>
+
+        <ons-list-header>カテゴリー</ons-list-header>
+        <ons-list-item id="shop_category"></ons-list-item>
+
+        <ons-list-header>電話番号</ons-list-header>
+        <ons-list-item id="shop_tel"></ons-list-item>
+
+        <ons-list-item>
+            <label class="left">
+                <ons-checkbox value="something" checked></ons-checkbox>
+            </label>
+            <label for="check-1" class="center">
+                テイクアウト可
+            </label>
+        </ons-list-item>
+
+        <ons-list-item>
+            <label class="left">
+                <ons-checkbox value="something"></ons-checkbox>
+            </label>
+            <label for="check-1" class="center">
+                予約可
+            </label>
+        </ons-list-item>
+
+        <ons-list-header>定休日</ons-list-header>
+        <ons-list-item id="shop_dayoff"></ons-list-item>
+
+        <ons-list-header>営業時間</ons-list-header>
+        <ons-list-item id="shop_hours"></ons-list-item>
+
+        <ons-list-header>Webサイト</ons-list-header>
+        <ons-list-item id="shop_url"></ons-list-item>
+
+        <ons-list-header>メール</ons-list-header>
+        <ons-list-item id="shop_mail"></ons-list-item>
+
+        <ons-list-header>メモ</ons-list-header>
+        <ons-list-item id="shop_memo"></ons-list-item>
+    </ons-list>
+
+    <ons-card>
+        <div id="info_map"></div>
+    </ons-card>
 
     <script>
         ons.getScriptPage().onInit = function () {
-            //console.log("info-page:onInit: " + this.data.title);
-            this.querySelector('#title').textContent = this.data.title;
-            this.querySelector('#index').textContent = this.data.index;
-
             var index = parseInt(this.data.index);
             var item = getShopItem(index);
-            if (item) {
-                var text = JSON.stringify(item);
-                this.querySelector('#content').textContent = text;
+
+            // item
+            var lon =　item["fX"];
+            var lat =　item["fY"];
+            var name = item["Name"];
+            var addr = item["Address1"];
+            var tel  = item["Phone"];
+            var category = item["category"];
+            var summary = item["Summary"];
+            var hours   = item["Hours"];
+            var dayoff  = item["dayoff"];
+            var url    = item["Website"];
+            var email  = item["email"];
+
+            // 店舗画像
+            this.querySelector('#shop_image').innerHTML = '<img src="cook0.jpg" width="50%">';
+
+            // 店名設定
+            this.querySelector('ons-toolbar .center').innerHTML = name;
+            this.querySelector('#shop_name').textContent = "店舗名： " + name;
+
+            // お店紹介
+            this.querySelector('#shop_summary').textContent = summary;
+
+            // カテゴリー
+            this.querySelector('#shop_category').textContent = category;
+
+            // 電話番号
+            this.querySelector('#shop_tel').innerHTML = '<address>連絡先：<a href="tel:' + tel + '">' + tel + '</a></address>';
+
+            // テイクアウト可
+            // ToDO:
+
+            // 予約可
+            // ToDO:
+
+            // 定休日
+            this.querySelector('#shop_dayoff').textContent = hours;
+            // 営業時間
+            this.querySelector('#shop_hours').textContent = dayoff;
+
+            // Webサイト>
+            if (url != null && url.length > 0) {
+                this.querySelector('#shop_url').innerHTML = '<a href="' + url + '">' + url + '</a>';
             }
+            // メール
+            if (email != null && email.length > 0) {
+                this.querySelector('#shop_mail').innerHTML = '<a href="mailto:' + email + 'subject=流山テイクアウトマップ&amp;body=修正依頼">' + email + '</a>';
+            }
+
+            // メモ
+            this.querySelector('#shop_memo').textContent = "";
+
+            // マップ
+            var map = L.map('info_map').setView([lat, lon], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            L.marker([lat, lon]).addTo(map)
+                    .bindPopup('名称：' + name +　"<br>" + 'カテゴリ：' + category +　"<br>"  + '電話：' + tel +　"<br>" + '住所：' + addr);
         }
     </script>
+
+    <style>
+        .image_center {
+            max-width: 50%;
+            margin: 0 auto;
+            text-align:center;
+            border: 1px;
+        }
+
+        #info_map {
+            z-index: 0;
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+
 </ons-page>
