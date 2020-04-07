@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>流山テイクアウトマップ</title>
+    <title>かわさき テイクアウト・デリバリーマップ</title>
 
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
@@ -19,6 +19,12 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
             integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
             crossorigin=""></script>
+
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.71.1/dist/L.Control.Locate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.71.1/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -34,7 +40,7 @@
 <ons-template id="tabbar.html">
 <ons-page>
     <ons-toolbar>
-        <div class="center" id="toolbar-title">流山テイクアウトマップ</div>
+        <div class="center" id="toolbar-title">かわさき テイクアウト・デリバリーマップ</div>
         <div class="right">
             <ons-toolbar-button onclick="fn.toggleMenu()">
                 <ons-icon icon="fa-bars"></ons-icon>
@@ -48,13 +54,9 @@
         </ons-tab>
         <ons-tab label="マップ" icon="fa-map" active-icon="fa-map-o" page="map.html">
         </ons-tab>
-        <!--
-        <ons-tab label="情報" icon="fa-info" page="info.html">
+        <ons-tab label="お店の登録" icon="fa-cog" active-icon="fa-cogs" page="form.html">
         </ons-tab>
-        <ons-tab label="設定" icon="fa-cog" active-icon="fa-cogs" page="setting.html">
-        </ons-tab>
-        -->
-        <ons-tab label="投稿する" icon="fa-info" page="about.html">
+        <ons-tab label="アプリについて" icon="fa-info" page="about.html">
         </ons-tab>
     </ons-tabbar>
 </ons-page>

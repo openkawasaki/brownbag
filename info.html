@@ -13,47 +13,35 @@
 
     <ons-list-title id="shop_name"></ons-list-title>
     <ons-list>
-        <ons-list-header>お店紹介</ons-list-header>
-        <ons-list-item id="shop_summary"></ons-list-item>
+        <ons-list-header>店舗概要</ons-list-header>
+        <ons-list-item id="shop_description"></ons-list-item>
 
-        <ons-list-header>カテゴリー</ons-list-header>
-        <ons-list-item id="shop_category"></ons-list-item>
+        <ons-list-header>お弁当・メニュー情報</ons-list-header>
+        <ons-list-item id="shop_menu"></ons-list-item>
+
+        <ons-list-header>ジャンル</ons-list-header>
+        <ons-list-item id="shop_genre"></ons-list-item>
 
         <ons-list-header>電話番号</ons-list-header>
-        <ons-list-item id="shop_tel"></ons-list-item>
+        <ons-list-item id="shop_phone"></ons-list-item>
 
-        <ons-list-item>
-            <label class="left">
-                <ons-checkbox value="something" checked></ons-checkbox>
-            </label>
-            <label for="check-1" class="center">
-                テイクアウト可
-            </label>
-        </ons-list-item>
+        <ons-list-header>テイクアウト（持ち帰り）</ons-list-header>
+        <ons-list-item id="shop_takeaway"></ons-list-item>
 
-        <ons-list-item>
-            <label class="left">
-                <ons-checkbox value="something"></ons-checkbox>
-            </label>
-            <label for="check-1" class="center">
-                予約可
-            </label>
-        </ons-list-item>
+        <ons-list-header>デリバリーサービス（出前・配達）</ons-list-header>
+        <ons-list-item id="shop_delivery"></ons-list-item>
 
         <ons-list-header>定休日</ons-list-header>
-        <ons-list-item id="shop_dayoff"></ons-list-item>
+        <ons-list-item id="shop_close_day"></ons-list-item>
 
         <ons-list-header>営業時間</ons-list-header>
-        <ons-list-item id="shop_hours"></ons-list-item>
+        <ons-list-item id="shop_opening_hours"></ons-list-item>
 
         <ons-list-header>Webサイト</ons-list-header>
-        <ons-list-item id="shop_url"></ons-list-item>
-
-        <ons-list-header>メール</ons-list-header>
-        <ons-list-item id="shop_mail"></ons-list-item>
+        <ons-list-item id="shop_website"></ons-list-item>
 
         <ons-list-header>メモ</ons-list-header>
-        <ons-list-item id="shop_memo"></ons-list-item>
+        <ons-list-item id="shop_note"></ons-list-item>
     </ons-list>
 
     <ons-card>
@@ -65,66 +53,117 @@
             var index = parseInt(this.data.index);
             var item = getShopItem(index);
 
+            var lon = 0.0;
+            var lat = 0.0;
+            var name = "";
+            var addr = "";
+            var phone = "";
+            var category = "";
+            var genre = "";
+            var description = "";
+            var opening_hours = "";
+            var close_day = "";
+            var website   = "";
+            var note = "";
+            var menu = "";
+            var takeaway = "";
+            var delivery = "";
+
             // item
-            var lon =　item["fX"];
-            var lat =　item["fY"];
-            var name = item["Name"];
-            var addr = item["Address1"];
-            var tel  = item["Phone"];
-            var category = item["category"];
-            var summary = item["Summary"];
-            var hours   = item["Hours"];
-            var dayoff  = item["dayoff"];
-            var url    = item["Website"];
-            var email  = item["email"];
+            if ("lon" in item)
+                lon =　item["lon"];
+            if ("lat" in item)
+                lat =　item["lat"];
+            if ("name" in item)
+                name = item["name"];
+            if ("addr" in item)
+                addr = item["addr"];
+            if ("phone" in item)
+                phone = item["phone"];
+            if ("category" in item)
+                category = item["category"];
+            if ("genre" in item)
+                genre = item["genre"];
+            if ("description" in item)
+                description = item["description"];
+            if ("opening_hours" in item)
+                opening_hours = item["opening_hours"];
+            if ("close_day" in item)
+                close_day = item["close_day"];
+            if ("website" in item)
+                website = item["website"];
+            if ("note" in item)
+                note = item["note"];
+            if ("menu" in item)
+                menu = item["menu"];
+            if ("takeaway" in item)
+                takeaway = item["takeaway"];
+            if ("delivery" in item)
+                delivery = item["delivery"];
 
             // 店舗画像
-            this.querySelector('#shop_image').innerHTML = '<img src="cook0.jpg" width="50%">';
+            this.querySelector('#shop_image').innerHTML = '<img src="cook.png" width="50%">';
 
             // 店名設定
             this.querySelector('ons-toolbar .center').innerHTML = name;
-            this.querySelector('#shop_name').textContent = "店舗名： " + name;
+            this.querySelector('#shop_name').textContent = "店名： " + name;
 
-            // お店紹介
-            this.querySelector('#shop_summary').textContent = summary;
+            // 店舗概要
+            this.querySelector('#shop_description').textContent = description;
+
+            // お弁当・メニュー情報
+            this.querySelector('#shop_menu').textContent = menu;
 
             // カテゴリー
-            this.querySelector('#shop_category').textContent = category;
+            //this.querySelector('#shop_category').textContent = category;
+
+            // ジャンル
+            this.querySelector('#shop_genre').textContent = genre;
 
             // 電話番号
-            this.querySelector('#shop_tel').innerHTML = '<address>連絡先：<a href="tel:' + tel + '">' + tel + '</a></address>';
+            this.querySelector('#shop_phone').innerHTML = '<address><a href="tel:' + phone + '">' + phone + '</a></address>';
 
-            // テイクアウト可
-            // ToDO:
+            // テイクアウト（持ち帰り）
+            this.querySelector('#shop_takeaway').textContent = takeaway;
 
-            // 予約可
-            // ToDO:
+            // デリバリーサービス（出前・配達）
+            this.querySelector('#shop_delivery').textContent = delivery;
 
             // 定休日
-            this.querySelector('#shop_dayoff').textContent = hours;
+            this.querySelector('#shop_close_day').textContent = close_day;
             // 営業時間
-            this.querySelector('#shop_hours').textContent = dayoff;
+            this.querySelector('#shop_opening_hours').textContent = opening_hours;
 
             // Webサイト>
-            if (url != null && url.length > 0) {
-                this.querySelector('#shop_url').innerHTML = '<a href="' + url + '">' + url + '</a>';
-            }
-            // メール
-            if (email != null && email.length > 0) {
-                this.querySelector('#shop_mail').innerHTML = '<a href="mailto:' + email + 'subject=流山テイクアウトマップ&amp;body=修正依頼">' + email + '</a>';
+            if (website != null && website.length > 0) {
+                this.querySelector('#shop_website').innerHTML = '<a href="' + website + '">' + website + '</a>';
             }
 
             // メモ
-            this.querySelector('#shop_memo').textContent = "";
+            this.querySelector('#shop_note').textContent = note;
 
             // マップ
-            var map = L.map('info_map').setView([lat, lon], 13);
+            var map = L.map('info_map').setView([lat, lon], 12);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
             L.marker([lat, lon]).addTo(map)
-                    .bindPopup('名称：' + name +　"<br>" + 'カテゴリ：' + category +　"<br>"  + '電話：' + tel +　"<br>" + '住所：' + addr);
+                    .bindPopup(name)
+                    .openPopup();
+
+            // Locate
+            var option = {
+                position: 'topright',
+                strings: {
+                    title: "現在地を表示",
+                    popup: "いまここ"
+                },
+                locateOptions: {
+                    maxZoom: 16
+                }
+            };
+            var lc = L.control.locate(option).addTo(map);
         }
     </script>
 

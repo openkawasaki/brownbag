@@ -132,5 +132,4 @@ yarn-error.log*
 .idea/
 00.SAVE/
 *.00?
-data.json
 dist/
