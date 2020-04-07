@@ -4,6 +4,7 @@
   "scripts": {
     "serve-node": "http-server",
     "serve": "python -m http.server 9000 --bind 127.0.0.1",
+    "build": "copy /Y * dist",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "repository": {
