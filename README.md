@@ -1,8 +1,9 @@
-Brown Bag
+BrownBagプロジェクト
 -------
-URL: <https://homata.github.io/brownbag/>
 
-店舗のランチマップをアプリです。  
+URL: <https://brownbag.openkawasaki.org/>
+
+川崎市を中心にテイクアウト（持ち帰り）・デリバリーサービス（出前・配達）が可能な飲食店の情報をまとめるアプリです。
 誰でも触れるように、シンプルなJSで記述してます。
 
 ### 使用ツール
@@ -26,5 +27,5 @@ Compiles and hot-reloads for development
 
 ## Licensing
 * Source code is under MIT license.
-    - https://github.com/homata/brownbag
+    - <https://github.com/openkawasaki/brownbag>
 * Copyright (c) 2020 @homata (https://twitter.com/homata)
