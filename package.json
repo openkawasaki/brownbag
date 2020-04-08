@@ -2,8 +2,7 @@
   "name": "brownbag",
   "version": "0.0.1",
   "scripts": {
-    "serve-node": "http-server",
-    "serve": "python -m http.server 9000 --bind 127.0.0.1",
+    "serve": "npx live-server",
     "build": "copy /Y * dist",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
@@ -21,6 +20,10 @@
   "devDependencies": {
     "csv2json": "^2.0.2",
     "gh-pages": "^2.2.0",
-    "push-dir": "^0.4.1"
+    "live-server": "^1.2.1",
+    "push-dir": "^0.4.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
