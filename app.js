@@ -2,8 +2,7 @@
 
 // CordovaのAPIを呼び出す準備が整った
 ons.ready(function() {
-    console.log("ons.ready");
-
+    //console.log("ons.ready");
     readShopList();
 });
 
@@ -72,6 +71,7 @@ document.addEventListener('prechange', function(event) {
 //--------------------------
 document.addEventListener("init", function(event) {
     var page = event.target;
+    /*
     if (page.id === "home-page") {
         console.log("home-page");
     } else if (page.id === "list-page") {
@@ -80,7 +80,14 @@ document.addEventListener("init", function(event) {
         console.log("map-page");
     } else if (page.id === "info-page") {
         console.log("info-page");
-    } else if (page.id === "setting-page") {
-        console.log("setting-page");
+    } else if (page.id === "form-page") {
+        console.log("form-page");
+    } else if (page.id === "form-edit-page") {
+        console.log("form-edit-page");
+    } else if (page.id === "about-page") {
+        console.log("about-page");
+    } else {
+        console.log(page.id);
     }
+    */
 });
